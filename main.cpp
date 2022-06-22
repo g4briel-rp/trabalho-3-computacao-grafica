@@ -52,7 +52,7 @@ void desenha_mesa(){
 
     //Criação da tabua da mesa.
     glPushMatrix();
-    glTranslatef(0.0, 10.2, 0.0);
+    glTranslatef(0.0, 10.05, 0.0);
     glNormal3f(0.0, 1.0, 0.0);
     glBegin(GL_QUADS);
     glTexCoord2f(0.0, 0.0); glVertex3f (-9.3, -1.4, -21.0);
@@ -324,10 +324,12 @@ void defineIluminacao(){
     GLfloat luzEspecular[] = {0.5, 0.5, 0.5, 1.0};
 
     GLfloat posicaoLuz[] = {0.0, 50.0, 50.0, 1.0};
-    GLfloat spotPosition[] = {-50.0, 75.0, 0.0, 1.0};
-    GLfloat spotCutOff[] = {90.0};
+    GLfloat spotPosition[] = {-25.0, 25.0, 0.0, 1.0};
+    GLfloat spotCutOff[] = {75.0};
 
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, luzAmbiente);
+    glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
+
     glLightfv(GL_LIGHT0, GL_AMBIENT, luzAmbiente);
     glLightfv(GL_LIGHT0, GL_POSITION, posicaoLuz);
 
@@ -353,6 +355,15 @@ void init(int option){
     glEnable(GL_LIGHT1);
     glEnable(GL_NORMALIZE);
 
+    q = gluNewQuadric();
+
+    desenha_chao();
+    desenha_mesa();
+    desenha_cadeiras();
+    desenha_luminaria();
+    desenha_garrafa();
+    desenha_taca();
+
     makeCheckImage();
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     glTexImage2D(GL_TEXTURE_2D, 0, 3, checkImageWidth, checkImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, &checkImage[0][0][0]);
@@ -362,21 +373,10 @@ void init(int option){
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
     glEnable(GL_TEXTURE_2D);
-
-    q = gluNewQuadric();
-
-    desenha_chao();
-    desenha_mesa();
-    desenha_cadeiras();
-    desenha_luminaria();
-    desenha_garrafa();
-    desenha_taca();
 }
 
 void display(void){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glLoadIdentity();
-    defineIluminacao();
 
 // Chama o display list do chao para exibi-lo
     glPushMatrix();
