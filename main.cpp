@@ -12,7 +12,7 @@
 #define	checkImageWidth 64
 #define	checkImageHeight 64
 
-/*	Create checkerboard texture	*/
+//Criação da textura quadriculada
 GLUquadricObj *q;
 GLubyte checkImage[checkImageWidth][checkImageHeight][3];
 
@@ -326,7 +326,7 @@ void desenha_taca(){
     glEndList();
 }
 
-// Função com os comandos pa
+// Função responsável pela especificação dos parâmetros de iluminação
 void defineIluminacao(){
     GLfloat luzAmbiente[] = {0.2, 0.2, 0.2, 1.0};
     GLfloat luzDifusa[] = {0.8, 0.8, 0.8, 1.0};
@@ -336,11 +336,14 @@ void defineIluminacao(){
     GLfloat spotPosition[] = {-25.0, 25.0, 0.0, 1.0};
     GLfloat spotCutOff[] = {75.0};
 
+    // Ativa o uso da luz ambiente
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, luzAmbiente);
 
+    // Define os parâmetros da luz de número 0
     glLightfv(GL_LIGHT0, GL_AMBIENT, luzAmbiente);
     glLightfv(GL_LIGHT0, GL_POSITION, posicaoLuz);
 
+    // Define os parâmetros da luz de número 1
     glLightfv(GL_LIGHT1, GL_DIFFUSE, luzDifusa);
     glLightfv(GL_LIGHT1, GL_SPECULAR, luzEspecular);
     glLightfv(GL_LIGHT1, GL_SPOT_CUTOFF, spotCutOff);
@@ -352,8 +355,10 @@ void init(int option){
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     if (option == 1)
+        // Habilita o modelo de colorização de Gouraud
         glShadeModel(GL_SMOOTH);
     if (option == 2)
+        // Habilita o modelo de colorização constante
         glShadeModel(GL_FLAT);
 
     // Habilita a definição da cor do material, escolhida dentro de cada função desenha
@@ -371,8 +376,7 @@ void init(int option){
     // Habilita a luz de número 1
     glEnable(GL_LIGHT1);
 
-    //
-    //glEnable(GL_NORMALIZE);
+    glEnable(GL_NORMALIZE);
 
     makeCheckImage();
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -382,10 +386,13 @@ void init(int option){
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_BLEND);
+
+    //Habilita textura
     glEnable(GL_TEXTURE_2D);
 
     q = gluNewQuadric();
 
+    // chamada das funções desenha
     desenha_chao();
     desenha_mesa();
     desenha_cadeiras();
@@ -395,6 +402,7 @@ void init(int option){
 }
 
 void display(void){
+// Limpa a janela e o depth buffer
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 // Chama o display list do chao para exibi-lo
@@ -434,6 +442,7 @@ void perspectiva(int w, int h){
     glViewport(0, 0, (GLsizei)w, (GLsizei)h);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
+    // Chama a função que especifica os parâmetros de iluminação
     defineIluminacao();
     gluPerspective(70.0, (GLfloat)w/(GLfloat)h, 1.0, 200.0);
     gluLookAt(0.0, 30.0, 50.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
