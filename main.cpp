@@ -12,6 +12,7 @@
 #define	checkImageWidth 64
 #define	checkImageHeight 64
 
+/*	Create checkerboard texture	*/
 GLUquadricObj *q;
 GLubyte checkImage[checkImageWidth][checkImageHeight][3];
 
@@ -28,11 +29,12 @@ void makeCheckImage(void){
     }
 }
 
+// Fun√ß√£o com os comandos para cria√ß√£o do ch√£o
 void desenha_chao(){
-    // Inicializa display lists para criaÁ„o do ch„o
+    // Inicializa display lists para cria√ß√£o do ch√£o
     glNewList(CHAO, GL_COMPILE);
 
-    // CriaÁ„o da malha formada GL_QUADS
+    // Cria√ß√£o da malha formada GL_QUADS
     glPushMatrix();
     glTranslatef(0.0, 0.0, -50.0);
     glBegin(GL_QUADS);
@@ -46,46 +48,48 @@ void desenha_chao(){
     glEndList();
 }
 
+// Fun√ß√£o com os comandos para cria√ß√£o da mesa
 void desenha_mesa(){
-    // Inicializa display lists para criaÁ„o da mesa
+    // Inicializa display lists para cria√ß√£o da mesa
     glNewList(MESA, GL_COMPILE); // Mesa
 
-    //CriaÁ„o da tabua da mesa.
+    //Cria√ß√£o da tabua da mesa.
     glPushMatrix();
     glTranslatef(0.0, 10.05, 0.0);
-    glNormal3f(0.0, 1.0, 0.0);
     glBegin(GL_QUADS);
-    glTexCoord2f(0.0, 0.0); glVertex3f (-9.3, -1.4, -21.0);
-    glTexCoord2f(0.0, 1.0); glVertex3f (9.3, -1.4, -21.0);
-    glTexCoord2f(1.0, 1.0); glVertex3f (9.3, -1.4, 21.0);
-    glTexCoord2f(1.0, 0.0); glVertex3f (-9.3, -1.4, 21.0);
+    glTexCoord2f(0.0, 0.0); glVertex3f (-12.0, -1.4, -23.0);
+    glTexCoord2f(0.0, 1.0); glVertex3f (12.0, -1.4, -23.0);
+    glTexCoord2f(1.0, 1.0); glVertex3f (12.0, -1.4, 23.0);
+    glTexCoord2f(1.0, 0.0); glVertex3f (-12.0, -1.4, 23.0);
     glEnd();
     glPopMatrix();
 
-    // CriaÁ„o do pÈ da mesa
+    // Cria√ß√£o do p√© da mesa
 
-    //pÈ esquerdo inferior
+    glColor3f(0.58, 0.29, 0.0);
+
+    //p√© esquerdo inferior
     glPushMatrix();
     glTranslatef(-8.0, -1.4, 20.0);
     glScalef(0.5, 4.0, 0.5);
     glutSolidCube(5.0);
     glPopMatrix();
 
-    //pÈ direito inferior
+    //p√© direito inferior
     glPushMatrix();
     glTranslatef(8.0, -1.4, 20.0);
     glScalef(0.5, 4.0, 0.5);
     glutSolidCube(5.0);
     glPopMatrix();
 
-    //pÈ esquerdo superior
+    //p√© esquerdo superior
     glPushMatrix();
     glTranslatef(-8.0, -1.4, -20.0);
     glScalef(0.5, 4.0, 0.5);
     glutSolidCube(5.0);
     glPopMatrix();
 
-    //pÈ direito superior
+    //p√© direito superior
     glPushMatrix();
     glTranslatef(8.0, -1.4, -20.0);
     glScalef(0.5, 4.0, 0.5);
@@ -95,15 +99,16 @@ void desenha_mesa(){
     glEndList();
 }
 
+// Fun√ß√£o com os comandos para cria√ß√£o das cadeiras
 void desenha_cadeiras(){
-    // Inicializa display lists para criaÁ„o das cadeiras
+    // Inicializa display lists para cria√ß√£o das cadeiras
     glNewList(CADEIRA, GL_COMPILE);
 
     glColor3f(0.58, 0.29, 0.0);
 
     //cadeira da esquerda
 
-    //pÈ direito inferior
+    //p√© direito inferior
     glPushMatrix();
     glTranslatef(-11.5, -6.5, 1.5);
     glRotatef(30.0, 0.0, 1.0, 0.0);
@@ -111,7 +116,7 @@ void desenha_cadeiras(){
     glutSolidCube(2.0);
     glPopMatrix();
 
-    //pÈ direito superior
+    //p√© direito superior
     glPushMatrix();
     glTranslatef(-16.0, -6.5, -6.5);
     glRotatef(30.0, 0.0, 1.0, 0.0);
@@ -119,7 +124,7 @@ void desenha_cadeiras(){
     glutSolidCube(2.0);
     glPopMatrix();
 
-    //pÈ esquerdo inferior
+    //p√© esquerdo inferior
     glPushMatrix();
     glTranslatef(-20.0, -6.5, 6.5);
     glRotatef(30.0, 0.0, 1.0, 0.0);
@@ -127,7 +132,7 @@ void desenha_cadeiras(){
     glutSolidCube(2.0);
     glPopMatrix();
 
-    //pÈ esquerdo superior
+    //p√© esquerdo superior
     glPushMatrix();
     glTranslatef(-24.5, -6.5, -1.5);
     glRotatef(30.0, 0.0, 1.0, 0.0);
@@ -158,7 +163,7 @@ void desenha_cadeiras(){
 
     //cadeira da direita
 
-    //pÈ direito inferior
+    //p√© direito inferior
     glPushMatrix();
     glTranslatef(24.5, -6.5, 1.5);
     glRotatef(30.0, 0.0, 1.0, 0.0);
@@ -166,7 +171,7 @@ void desenha_cadeiras(){
     glutSolidCube(2.0);
     glPopMatrix();
 
-    //pÈ direito superior
+    //p√© direito superior
     glPushMatrix();
     glTranslatef(20.0, -6.5, -6.5);
     glRotatef(30.0, 0.0, 1.0, 0.0);
@@ -174,7 +179,7 @@ void desenha_cadeiras(){
     glutSolidCube(2.0);
     glPopMatrix();
 
-    //pÈ esquerdo inferior
+    //p√© esquerdo inferior
     glPushMatrix();
     glTranslatef(16.5, -6.5, 6.5);
     glRotatef(30.0, 0.0, 1.0, 0.0);
@@ -182,7 +187,7 @@ void desenha_cadeiras(){
     glutSolidCube(2.0);
     glPopMatrix();
 
-    //pÈ esquerdo superior
+    //p√© esquerdo superior
     glPushMatrix();
     glTranslatef(11.5, -6.5, -2.5);
     glRotatef(30.0, 0.0, 1.0, 0.0);
@@ -212,13 +217,14 @@ void desenha_cadeiras(){
     glEndList();
 }
 
+// Fun√ß√£o com os comandos para cria√ß√£o da luminaria
 void desenha_luminaria(){
-    // Inicializa display lists para criaÁ„o da luminaria
+    // Inicializa display lists para cria√ß√£o da luminaria
     glNewList(LUMINARIA, GL_COMPILE);
 
     glColor3f(0.0, 0.0, 0.0);
 
-    //proteÁ„o da lampada
+    //prote√ß√£o da lampada
     glPushMatrix();
     glTranslatef (-24.5, 19.5, -39.5);
     glRotatef(-160.0, 0.0, 1.0, 0.0);
@@ -233,7 +239,7 @@ void desenha_luminaria(){
     gluCylinder(q, 1.0, 1.0, 10.0, 5.0, 5.0);
     glPopMatrix();
 
-    //pÈ
+    //p√©
     glPushMatrix();
     glTranslatef (-28.0, -11.5, -50.0);
     glRotatef(90.0, 1.0, 0.0, 0.0);
@@ -251,8 +257,9 @@ void desenha_luminaria(){
     glEndList();
 }
 
+// Fun√ß√£o com os comandos para cria√ß√£o da garrafa
 void desenha_garrafa(){
-    // Inicializa display lists para criaÁ„o da garrafa
+    // Inicializa display lists para cria√ß√£o da garrafa
     glNewList(GARRAFA, GL_COMPILE);
 
     glColor3f(0.18, 0.54, 0.34);
@@ -290,8 +297,9 @@ void desenha_garrafa(){
     glEndList();
 }
 
+// Fun√ß√£o com os comandos para cria√ß√£o da ta√ßa
 void desenha_taca(){
-    // Inicializa display lists para criaÁ„o da taÁa
+    // Inicializa display lists para cria√ß√£o da ta√ßa
     glNewList(TACA, GL_COMPILE);
 
     //cilindro superior
@@ -308,7 +316,7 @@ void desenha_taca(){
     gluCylinder(q, 0.15, 0.15, 2.5, 10.0, 5.0);
     glPopMatrix();
 
-    //base da taÁa
+    //base da ta√ßa
     glPushMatrix();
     glTranslatef (0.0, 11.5, 0.0);
     glRotatef(90.0, 1.0, 0.0, 0.0);
@@ -318,6 +326,7 @@ void desenha_taca(){
     glEndList();
 }
 
+// Fun√ß√£o com os comandos pa
 void defineIluminacao(){
     GLfloat luzAmbiente[] = {0.2, 0.2, 0.2, 1.0};
     GLfloat luzDifusa[] = {0.8, 0.8, 0.8, 1.0};
@@ -328,7 +337,6 @@ void defineIluminacao(){
     GLfloat spotCutOff[] = {75.0};
 
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, luzAmbiente);
-    glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
 
     glLightfv(GL_LIGHT0, GL_AMBIENT, luzAmbiente);
     glLightfv(GL_LIGHT0, GL_POSITION, posicaoLuz);
@@ -348,12 +356,33 @@ void init(int option){
     if (option == 2)
         glShadeModel(GL_FLAT);
 
+    // Habilita a defini√ß√£o da cor do material, escolhida dentro de cada fun√ß√£o desenha
     glEnable(GL_COLOR_MATERIAL);
+
+    // Habilita o depth-buffering
     glEnable(GL_DEPTH_TEST);
+
+    //Habilita o uso de ilumina√ß√£o
     glEnable(GL_LIGHTING);
+
+    // Habilita a luz de n√∫mero 0
     glEnable(GL_LIGHT0);
+
+    // Habilita a luz de n√∫mero 1
     glEnable(GL_LIGHT1);
-    glEnable(GL_NORMALIZE);
+
+    //
+    //glEnable(GL_NORMALIZE);
+
+    makeCheckImage();
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+    glTexImage2D(GL_TEXTURE_2D, 0, 3, checkImageWidth, checkImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, &checkImage[0][0][0]);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_BLEND);
+    glEnable(GL_TEXTURE_2D);
 
     q = gluNewQuadric();
 
@@ -363,16 +392,6 @@ void init(int option){
     desenha_luminaria();
     desenha_garrafa();
     desenha_taca();
-
-    makeCheckImage();
-    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    glTexImage2D(GL_TEXTURE_2D, 0, 3, checkImageWidth, checkImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, &checkImage[0][0][0]);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
-    glEnable(GL_TEXTURE_2D);
 }
 
 void display(void){
@@ -403,7 +422,7 @@ void display(void){
     glCallList(GARRAFA);
     glPopMatrix();
 
-//Chama o display list da taÁa para exibi-lo
+//Chama o display list da ta√ßa para exibi-lo
     glPushMatrix();
     glCallList(TACA);
     glPopMatrix();
